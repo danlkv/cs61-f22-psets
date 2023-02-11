@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/cs161.css">
+    <link rel="canonical" href="https://cs61.seas.harvard.edu/site/2022/Stdio/">
+    <title>Problem set 4 – CS 61</title>
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="https://cs61.seas.harvard.edu/site/2022/">CS 61</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown-info" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Info
+    </a>
+    <div class="dropdown-menu" aria-labelledby="nav-dropdown-info">
+    
+      <a class="dropdown-item" href="../../2022/CourseDescription/">Course Description</a>
+    
+      <a class="dropdown-item" href="../../2022/Staff/">Course Staff</a>
+    
+      <a class="dropdown-item" href="../../2022/Extension/">Extension</a>
+    
+      <a class="dropdown-item" href="../../2022/Resources/">Resources</a>
+    
+      <a class="dropdown-item" href="../../2022/Style/">Style</a>
+    
+      <a class="dropdown-item" href="../../2022/Textbook/">Textbook</a>
+    
+      <a class="dropdown-item" href="../../2022/SetupGitHub/">Setup: GitHub</a>
+    
+      <a class="dropdown-item" href="../../2022/SetupDocker/">Setup: Docker</a>
+    
+      <a class="dropdown-item" href="../../2022/SetupVM/">Setup: VM</a>
+    
+      <a class="dropdown-item" href="../../2022/Patterns/">C and C&#43;&#43; Patterns</a>
+    
+      <a class="dropdown-item" href="../../ref/diff/">Diff</a>
+    
+      <a class="dropdown-item" href="../../ref/file-descriptors/">File Descriptors</a>
+    
+      <a class="dropdown-item" href="../../ref/gdb-commands/">GDB Commands</a>
+    
+      <a class="dropdown-item" href="../../ref/gdb/">GDB Introduction</a>
+    
+      <a class="dropdown-item" href="../../ref/git/">Git</a>
+    
+      <a class="dropdown-item" href="../../ref/http/">HTTP</a>
+    
+      <a class="dropdown-item" href="../../2022/Final/">Final</a>
+    
+      <a class="dropdown-item" href="../../2022/Midterm/">Midterm</a>
+    
+    </div>
+  </li>
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown-psets" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Problem sets
+    </a>
+    <div class="dropdown-menu" aria-labelledby="nav-dropdown-psets">
+    
+      <a class="dropdown-item" href="../../2022/Pset0/">Problem set 0</a>
+    
+      <a class="dropdown-item" href="../../2022/Malloc/">Problem set 1</a>
+    
+      <a class="dropdown-item" href="../../2022/DatarepEx/">Data representation exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/BinaryBomb/">Problem set 2</a>
+    
+      <a class="dropdown-item" href="../../2022/AsmEx/">Assembly exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/WeensyOS/">Problem set 3</a>
+    
+      <a class="dropdown-item" href="../../2022/KernelEx/">Kernel exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/Stdio/">Problem set 4</a>
+    
+      <a class="dropdown-item" href="../../2022/StorageEx/">Storage exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/Shell/">Problem set 5</a>
+    
+      <a class="dropdown-item" href="../../2022/ShellInt/">Problem set 5: Interruption</a>
+    
+      <a class="dropdown-item" href="../../2022/ProcessEx/">Process control exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/Flockchain/">Problem set 6</a>
+    
+      <a class="dropdown-item" href="../../2022/SynchEx/">Synchronization exercises</a>
+    
+    </div>
+  </li>
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown-lectures" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Lectures
+    </a>
+    <div class="dropdown-menu" aria-labelledby="nav-dropdown-lectures">
+    
+      <a class="dropdown-item" href="../../2022/Datarep/">Data representation</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep1/">Data representation 1: Introduction</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep2/">Data representation 2: Sizes and layout</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep3/">Data representation 3: Layout and allocators</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep4/">Data representation 4: Argument passing, sizes, segments</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep5/">Data representation 5: Integers and undefined behavior</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep6/">Data representation 6: Assertions and arenas</a>
+    
+      <a class="dropdown-item" href="../../2022/Datarep7/">Data representation 7: Arenas and code representation</a>
+    
+      <a class="dropdown-item" href="../../2022/DatarepSupp1/">Data representation supplemental 1: Terminal and Docker</a>
+    
+      <a class="dropdown-item" href="../../2022/Asm/">Assembly</a>
+    
+      <a class="dropdown-item" href="../../2022/Asm1/">Assembly 1: Data movement and arithmetic</a>
+    
+      <a class="dropdown-item" href="../../2022/Asm2/">Assembly 2: Arithmetic, calling convention, control flow</a>
+    
+      <a class="dropdown-item" href="../../2022/Asm3/">Assembly 3: Branching</a>
+    
+      <a class="dropdown-item" href="../../2022/Kernel/">Kernel</a>
+    
+      <a class="dropdown-item" href="../../2022/Kernel1/">Kernel 1: Processes, isolation, robustness</a>
+    
+      <a class="dropdown-item" href="../../2022/Kernel2/">Kernel 2: Virtual memory</a>
+    
+      <a class="dropdown-item" href="../../2022/Kernel3/">Kernel 3: Page tables</a>
+    
+      <a class="dropdown-item" href="../../2022/Unicode/">EthiCS: Harms and Unicode</a>
+    
+      <a class="dropdown-item" href="../../2022/UTF8/">EthiCS: UTF-8</a>
+    
+      <a class="dropdown-item" href="../../2022/Storage/">Storage</a>
+    
+      <a class="dropdown-item" href="../../2022/Storage1/">Storage 1: OS input/output, memory hierarchy</a>
+    
+      <a class="dropdown-item" href="../../2022/Storage2/">Storage 2: Caches, costs and benefits, stdio</a>
+    
+      <a class="dropdown-item" href="../../2022/Storage3/">Storage 3: Cache optimizations and coherence</a>
+    
+      <a class="dropdown-item" href="../../2022/Storage4/">Storage 4: Eviction policies and types of file</a>
+    
+      <a class="dropdown-item" href="../../2022/StorageSupp1/">Storage Supplement 1: Matrices</a>
+    
+      <a class="dropdown-item" href="../../2022/Process/">Process control</a>
+    
+      <a class="dropdown-item" href="../../2022/Process1/">Processes 1: Basics</a>
+    
+      <a class="dropdown-item" href="../../2022/Process2/">Processes 2: Primary process system calls</a>
+    
+      <a class="dropdown-item" href="../../2022/Process3/">Processes 3: Inter-process communication</a>
+    
+      <a class="dropdown-item" href="../../2022/Process4/">Processes 4: Interruption and race conditions</a>
+    
+      <a class="dropdown-item" href="../../2022/Synch/">Synchronization</a>
+    
+      <a class="dropdown-item" href="../../2022/Synch1/">Synchronization 1: Atomicity</a>
+    
+      <a class="dropdown-item" href="../../2022/Synch2/">Synchronization 2: Condition variables and lost wakeups</a>
+    
+      <a class="dropdown-item" href="../../2022/SynchSupp1/">Synchronization Supplement 1: Organizing time</a>
+    
+      <a class="dropdown-item" href="../../2022/Synch3/">Synchronization 3: Databases</a>
+    
+    </div>
+  </li>
+        <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-dropdown-sections" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sections
+    </a>
+    <div class="dropdown-menu" aria-labelledby="nav-dropdown-sections">
+    
+      <a class="dropdown-item" href="../../2022/DatarepSection1/">Datarep Section 1: C&#43;&#43; data structures</a>
+    
+      <a class="dropdown-item" href="../../2022/DatarepSection2/">Datarep Section 2: Memory bugs</a>
+    
+      <a class="dropdown-item" href="../../2022/DatarepSection3/">Datarep Section 3: Data representation exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/AsmSection1/">Assembly Section 1: Fun</a>
+    
+      <a class="dropdown-item" href="../../2022/AsmSection2/">Assembly Section 2: Assembly exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/KernelSection1/">Kernel Section 1: WeensyOS</a>
+    
+      <a class="dropdown-item" href="../../2022/KernelSection2/">Kernel Section 2: Kernel exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/StorageSection1/">Storage Section 1: Single-slot cache</a>
+    
+      <a class="dropdown-item" href="../../2022/StorageSection2/">Storage Section 2: Storage exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/BNFGrammars/">Process Supplement: BNF grammars</a>
+    
+      <a class="dropdown-item" href="../../2022/ProcessSection1/">Process Section 1: Command line representation</a>
+    
+      <a class="dropdown-item" href="../../2022/ProcessSection2/">Process Section 2: Process control exercises</a>
+    
+      <a class="dropdown-item" href="../../2022/SynchSection1/">Synchronization Section 1: Threads and synchronization objects</a>
+    
+    </div>
+  </li>
+        
+        <li class="nav-item"><script>
+  (function() {
+    var cx ='d7603b40ed37b4d1b';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    document.head.append(gcse);
+  })();
+</script><div class="gcse-search"></div></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="hello-background"></div>
+
+
+<div class="container">
+    <h1><a href="https://cs61.seas.harvard.edu/site/2022/Stdio/">Problem set 4: Stdio</a></h1>
+    <div class="post">
+        <p>In this problem set, you’ll gain experience with caching by writing your
+own buffered I/O library.</p>
+<ul>
+<li>Due <strong>Sunday 11/13</strong> at 11:59pm for college students (1 day later for DCE).</li>
+<li><strong>Reminder:</strong> You may not use code or solutions from previous years.</li>
+</ul>
+<h2 id="get-the-code">Get the code</h2>
+<p>Get our code with</p>
+<pre tabindex="0"><code class="language-shellsession" data-lang="shellsession">$ git pull; git pull handout main
+</code></pre><p>or, alternately</p>
+<pre tabindex="0"><code class="language-shellsession" data-lang="shellsession">$ git pull; git pull https://github.com/cs61/cs61-f22-psets.git main
+</code></pre><p>This will <a href="../../ref/git#Merges">merge</a> our Problem Set 4 code with your previous
+work. If you have any “conflicts” from prior problem sets, <a href="../../ref/git#Conflicts">resolve
+them</a> before continuing further. Run <code>git push</code> to save
+your work back to your personal repository.</p>
+<p>You may also create a new <code>cs61-psets</code> repository for this assignment. Don’t
+forget to enter your repository URL on the grading server.</p>
+<h2 id="goal">Goal</h2>
+<p>Our simple IO61 library performs I/O on files.
+You will find the code in the pset directory in the file <code>io61.cc</code>. Our
+version of IO61 is pretty stupid—it uses byte-at-a-time system call
+I/O and is thus quite slow. Your goal is simple: <em>speed it up using
+caching.</em></p>
+<p>We also distribute several programs that use IO61. (The grading server has
+some secret extra programs too, and it has tests that use our handout programs
+in different ways.)</p>
+<ul>
+<li><code>cat61</code> reads a file sequentially one byte at a time and writes
+it to standard output.</li>
+<li><code>blockcat61</code> is like <code>cat61</code>, but reads the file sequentially one
+<em>block</em> at a time. Its <code>-b BLOCKSIZE</code> argument sets the block size.</li>
+<li><code>randblockcat61</code> is like <code>blockcat61</code>, but it chooses a <em>random</em>
+block size for each read and write. It still reads and writes
+sequentially (only the block sizes are random). The <code>-b</code> argument is
+the maximum possible block size. This may very well stress your
+caching solution.</li>
+<li><code>reverse61</code> reads a file a byte at a time <em>in reverse</em> and
+writes the result to standard output.</li>
+<li><code>stride61</code> reads its input file using a strided access pattern,
+writing the data it reads sequentially. By strided, we mean that it
+begins at offset 0, reads BLOCKSIZE bytes, seeks to position STRIDE,
+reads another block, seeks to position (2 * STRIDE), etc. When it
+gets to the end of the file, it jumps back to the first bytes not
+yet read and repeats the pattern. The <code>-b</code> and <code>-s</code> arguments set
+the block size and stride length, respectively.</li>
+<li><code>reordercat61</code> reads its input file one block at a time <em>in random
+order</em> and writes each block to the output file <em>at the correct
+position</em>. The result is a copy of the input file, but created
+non-sequentially.</li>
+<li><code>scattergather61</code> can take two or more input files and two or more output
+files. It reads blocks (or lines) from the input files in round-robin
+order, and writes them to the output files in round-robin order. This will
+test your ability to handle multiple input and output files.</li>
+</ul>
+<p>And there are others.</p>
+<p>You will introduce caching to the <code>io61_file</code> abstraction and use your cache
+to speed up IO61 operations. We’re giving you tons of freedom to implement the
+cache as you like. You may even use <a href="../../ref/file-descriptors">memory-mapped I/O</a>,
+<a href="../../ref/file-descriptors">prefetching system calls</a> like <code>madvise</code> or <code>posix_fadvise</code>,
+or multiple threads or processes <strong>(although none of these are required)</strong>.
+But you <strong>may not</strong> use another buffered I/O library or caching I/O library.</p>
+<p>Your library should:</p>
+<ul>
+<li><strong>Return correct results</strong> for <em>all</em> access patterns and file types,
+including multiple files, very large files, non-seekable files,
+files that return short reads or accept short writes, mixtures of
+calls (for instance, alternating <code>io61_read</code> and <code>io61_readc</code>), and
+random accesses.</li>
+<li>Perform as well as stdio on <strong>sequential</strong> reads and writes for
+<em>any</em> files, including very large files (such as files that don’t
+fit in memory) and non-seekable files.</li>
+<li>Improve on stdio’s performance for <strong>some non-sequential</strong> access
+patterns, such as simple strides or reverse access.</li>
+</ul>
+<p>Code will be graded based on performance on the grading server.</p>
+<p>All your code for the main pset should fit in <code>io61.cc</code>.</p>
+<h2 id="evaluation">Evaluation</h2>
+<p>We will evaluate you based on your code’s performance relative to a version of
+IO61 that uses stdio. That version is provided for you in <code>stdio-io61.cc</code>.
+(You can build a stdio test with <code>make stdio-cat61</code> and so forth.)</p>
+<p>Run <code>make check</code> to check your current implementation on a battery of tests
+and print summary statistics at the end. The tests are divided into groups:</p>
+<ul>
+<li>
+<p>The <strong>correctness tests</strong> (tests C1, C2, etc.) stress-test your code for common
+errors. Performance on these tests is not important. As always, add
+assertions to your code, and we’ll give extra credit for tests of your own.</p>
+</li>
+<li>
+<p>The <strong>medium-file sequential performance tests</strong> (tests MSEQ*)
+perform sequential I/O on 5MiB files.</p>
+</li>
+<li>
+<p>The <strong>medium-file non-sequential performance tests</strong> (tests MNONSEQ*)
+perform non-sequential I/O (e.g., reverse, random, or stride) on 5MiB files.</p>
+</li>
+<li>
+<p>The <strong>large-file sequential performance tests</strong> (tests LSEQ*)
+perform sequential I/O on 64MiB files.</p>
+</li>
+<li>
+<p>The <strong>large-file non-sequential performance tests</strong> (tests
+LNONSEQ*) perform sequential I/O on 64MiB files.</p>
+</li>
+<li>
+<p>The <strong>secret tests</strong> (tests SECRET*) are only on the grading server.</p>
+</li>
+</ul>
+<p>Run <code>make check-TESTS</code> (e.g., <code>make check-seqperf</code> or <code>make check-seqperf1-3</code>)
+to run selected tests.</p>
+<p>We may update the tests during the pset release period. We may also run
+additional tests during grading. In all instances, <strong>correctness matters
+most</strong>. A program that runs quickly but incorrectly is worse than a program
+that runs slowly but correctly.</p>
+<h2 id="roadmap">Roadmap</h2>
+<p>It’s easy in this problem set to design something too complex and get
+yourself stuck. Avoid that problem by tackling the simple cases first.
+Here’s a possible roadmap.</p>
+<h3 id="phase-1">Phase 1</h3>
+<p>You can improve the way <code>io61_read</code> and <code>io61_write</code> work <em>without introducing
+a cache</em>. Use <code>strace</code> to investigate the operation of <code>blockcat61</code>. Look at
+the <code>blockcat61</code> code; what system calls do you think it should make? Then run
+<code>strace -o strace.out ./blockcat61 blockcat61.cc</code>. (That command line tells
+<code>strace</code> to write its output to <code>strace.out</code>, so examine <code>strace.out</code> with a
+command like <code>less strace.out</code>.) What system calls does <code>blockcat61</code>
+<strong>actually</strong> make?</p>
+<p>This will improve your performance on the block I/O tests (e.g., <code>make check-mseq2</code>). Also check that your code still passes the correctness tests
+(<code>make check-c</code>).</p>
+<blockquote class="note"><p>As you work on improving the performance of your code on sequential access
+patterns, you may want to ignore non-sequential access patterns. This will
+mean your code will produce incorrect results for non-sequential tests like
+C12, C13, and C14. That’s OK as long as you fix it later!</p>
+</blockquote>
+<h3 id="phase-2">Phase 2</h3>
+<p>Implement a <strong>single-slot cache buffer for sequential reads</strong>. This will hold
+bytes [N, N+B) of the file, where B is some largish number (try different
+numbers). Any read request that lies within that range of bytes can be
+satisfied without making a system call. Check your work by examining <code>strace</code>
+output.</p>
+<p>This will improve your performance on byte I/O tests (e.g., <code>make check-mseq1</code>).</p>
+<p>After you've implemented your cache buffer for reading, consider a special
+case for reading one character at a time from your cache in <code>io61_readc</code>. Can
+we avoid calling <code>io61_read</code> if we only want to read a single byte?</p>
+<h3 id="phase-3">Phase 3</h3>
+<p>Extend your single-slot cache buffer to also support <strong>sequential writes</strong>.</p>
+<p>This will improve your performance on byte I/O tests. If you do this well, you
+should now match or beat stdio’s performance on all sequential I/O tests!</p>
+<h3 id="phase-4">Phase 4</h3>
+<p>Fix your code to handle seeks correctly (but not necessarily in a
+high-performance way).</p>
+<p>This should make your code produce correct results for all tests.</p>
+<h3 id="phase-5">Phase 5</h3>
+<p>Change your code to continue handling seeks correctly, but with good
+performance for <code>reverse61</code>. For ideas, try running <code>strace</code> on the
+<code>stdio-reverse61</code> variant. What does it look like stdio is doing?</p>
+<p>This should make your code both roughly equal stdio’s performance and produce
+correct results on all tests.</p>
+<h3 id="phase-6">Phase 6</h3>
+<p>Finally, it’s time to outperform stdio on some tests! Perhaps a bigger cache
+buffer will outperform stdio; perhaps memory-mapped files will help. If you
+have worked through the previous phases, you will have ideas of your own.</p>
+<h2 id="hints-and-troubleshooting">Hints and troubleshooting</h2>
+<p><strong>Read our <a href="../../ref/file-descriptors">file descriptors notes</a></strong> if you are confused
+about file descriptor system calls.</p>
+<p>You will likely need to change most of the functions in <code>io61.cc</code>.</p>
+<p>Stdio is a well-written package! It is OK if you can’t <em>always</em> beat it,
+especially for sequential I/O.</p>
+<p><strong>Write your own tests!</strong> This will help you shake out bugs in your code,
+particularly correctness bugs. What diabolical things can you think of to try?
+You can add new tests pretty easily; just edit <code>GNUmakefile</code> and <code>check.pl</code>.</p>
+<p>If a program using your library produces incorrect results, it can be hard to
+figure out whether the problem is with reads, writes, or both. For instance,
+perhaps your read cache is wrong, so the program is reading incorrect data; or
+perhaps the write cache is wrong, so the the program is trying to write
+correct data, but the data passed through to the kernel via system calls is
+wrong. To distinguish these scenarios, you can use <code>strace</code> to check things
+like file positions. You can also use the <code>read61</code>, <code>write61</code>, <code>blockread61</code>,
+and <code>blockwrite61</code> programs. These behave like <code>cat61</code> and <code>blockcat61</code>, but
+they use stdio for half their tasks. The <code>read</code> variants use IO61 for reading
+and stdio for writing, whereas the <code>write</code> variants use IO61 for writing and
+stdio for reading. If <code>cat61</code> and <code>write61</code> produce bad results but <code>read61</code>
+on the same workload produces correct results, you can be pretty sure the
+problem is with writes.</p>
+<p>You may make a couple assumptions:</p>
+<ul>
+<li>You may assume that any file descriptor passed to <code>io61_fdopen</code> has
+its file pointer set to 0 (the beginning of the file).</li>
+<li>You don’t need to set the file pointer after every call to
+<code>io61_seek</code>.</li>
+</ul>
+<p>Add assertions in your code, since they can help you check correctness.
+However, assertions do take time to check, which could leave your code at a
+disadvantage relative to stdio. We will check the performance of your code
+<strong>with assertions disabled</strong> by running <code>make NDEBUG=1 check-TEST</code>.</p>
+<p>If your code is slow, consider (1) the system calls it makes and (2) its CPU
+performance. For system calls, use <code>strace</code> to check: Is a mistake in your
+code accidentally causing expensive system calls, such as many <code>read</code> calls
+that read one byte each? For CPU performance, consider whether there are
+functions that can avoid some extra work. It might pay off to have specialized
+<code>io61_readc</code> and <code>io61_writec</code> calls, for example.</p>
+<h2 id="make-targets">Make targets</h2>
+<p>Your code <strong>must</strong> work correctly with sanitizers turned on (though it will
+not be very fast). Run <code>make SAN=1 check</code> to check for errors.</p>
+<p>To get an strace log for your code on a specific test, use <code>make STRACE=1 check-TEST</code>. The strace output will be stored in <code>strace.out</code>.</p>
+<p>To run without running the stdio tests, use <code>make NOSTDIO=1 check</code>.</p>
+<p>To run with one trial rather than multiple trials, use <code>make TRIALS=1 check</code>.</p>
+<p>To compile without optimization (which might help you debug), run <code>make O=0</code>.</p>
+<p>To disable assertions, use <code>make NDEBUG=1 check</code>.</p>
+<h2 id="going-beyond">Going beyond</h2>
+<p>If you feel ambitious, you might try changing your code to use memory-mapped
+I/O when this is possible. Memory-mapped I/O is not always possible, though,
+so your old block cache should be used for pipe files and other non-mappable
+files. This should make your code beat stdio on some non-sequential I/O tests!</p>
+<p>If you have additional time and feel even more ambitious, you can implement an
+associative cache that holds multiple blocks and works for (a) non-mappable
+files or (b) very large memory-mapped files. Something like this will get the
+highest performance.</p>
+<p>It is difficult and rewarding to implement an associative cache. You’ll learn
+a lot! But design carefully so you don't make your other code more difficult
+to read and maintain. In fact, you might try working on <a href="../../ref/git">a separate
+branch</a> initially.</p>
+<h2 id="turnin">Turnin</h2>
+<p>You will turn in your code by <em>pushing your git repository to
+github.com</em> and <em>updating <a href="https://cs61.seas.harvard.edu/grade/cs61-2022/">the grading server</a></em> with your repository.</p>
+<p><strong>Don’t forget to fill out <code>README.md</code> and <code>AUTHORS.md</code>.</strong></p>
+<hr/>
+<p>This pset was originally created for CS61.</p>
+
+    </div>
+</div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
+        <script src="https://cs61.seas.harvard.edu/site/js/cs161.js"></script>
+    </body>
+</html>
+
